@@ -1,10 +1,10 @@
  // Initialize Firebase
  var config = {
-    apiKey: "AIzaSyDV8pUMlI60IejUCRQFmi7r-_-7g0P1aeM",
-    authDomain: "train-scheduler-b4215.firebaseio.com",
-    databaseURL: "https://train-scheduler-b4215.firebaseio.com/",
-    storageBucket: "gs://train-scheduler-b4215.appspot.com",
-    messagingSenderId: "96262435526"
+  apiKey: "AIzaSyCClyBvLv8mjuoompbARdiKoRMO9V5VTm4",
+  authDomain: "my-awesome-project-8861a.firebaseio.com",
+  databaseURL: "https://my-awesome-project-8861a.firebaseio.com/",
+  storageBucket: "gs://my-awesome-project-8861a.appspot.com",
+  messagingSenderId: "818275357299"
   };
 
   firebase.initializeApp(config);
@@ -23,6 +23,9 @@
 //   console.log(totalBilled);
 //   var dateFormat = "MM/DD/YYY";
 //   var convertedDate = moment (startDate, dateFormat);
+
+
+
 
   $("#add-train").on("click", function(event) {
     event.preventDefault();
@@ -47,8 +50,8 @@
       destination: destination,
       firstTime: firstTime,
       frequency: frequency,
-    //   nextArrival: nextArrival, 
-    //   minutesAway: minutesAway,
+      nextArrival: nextArrival, 
+      minutesAway: minutesAway,
       dateAdded: firebase.database.ServerValue.TIMESTAMP
     });
   });
