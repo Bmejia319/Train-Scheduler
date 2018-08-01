@@ -17,14 +17,7 @@
   var destination = "";
   var firstTime = "";
   var frequency = 0;
-//   var monthsWorked = (moment(startDate).diff(moment(),"months"));
-//   console.log(monthsWorked);
-//   var totalBilled = monthsWorked * monthlyRate;
-//   console.log(totalBilled);
-//   var dateFormat = "MM/DD/YYY";
-//   var convertedDate = moment (startDate, dateFormat);
-
-
+ 
 
 
   $("#add-train").on("click", function(event) {
@@ -36,13 +29,30 @@
     firstTime = $("#firstTime-input").val().trim();
     frequency = $("#frequency-input").val().trim();
 
-    // obtaining months worked and total billed 
-    // var dateFormat = "MM/DD/YYYY";
-    // var convertedDate = moment (startDate, dateFormat);
-
-    // console.log(moment(convertedDate).toNow());
-
-
+    var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+    console.log(firstTimeConverted);
+  
+    // Current Time
+    var currentTime = moment();
+    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+  
+    // Difference between the times
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    console.log("DIFFERENCE IN TIME: " + diffTime);
+  
+    // Time apart (remainder)
+    var tRemainder = diffTime % frequency;
+    console.log(tRemainder);
+  
+    // Minute Until Train
+    var minutesAway = frequency - tRemainder;
+    console.log("MINUTES TILL TRAIN: " + minutesAway);
+  
+    // Next Train
+    var nextArrival = moment().add(minutesAway, "minutes");
+    console.log("ARRIVAL TIME: " + moment(nextArrival).format("hh:mm"));
+     
+  
 
     // Code for handling the push
     dataRef.ref().push({
@@ -50,8 +60,8 @@
       destination: destination,
       firstTime: firstTime,
       frequency: frequency,
-      nextArrival: nextArrival, 
-      minutesAway: minutesAway,
+      // nextArrival: nextArrival, 
+      // minutesAway: minutesAway,
       dateAdded: firebase.database.ServerValue.TIMESTAMP
     });
   });
@@ -61,13 +71,14 @@
     // storing the snapshot.val() in a variable for convenience
     var sv = snapshot.val();
 
+    
     // Console.loging the last user's data
     console.log(sv.name);
     console.log(sv.destination);
     console.log(sv.firstTime);
     console.log(sv.frequency);
-    // console.log(sv.nextArrival);
-    // console.log(sv.minutesAway);
+    console.log(sv.nextArrival);
+    console.log(sv.minutesAway);
 
     // Change the HTML to reflect
     $("#name-display").text(sv.name);
@@ -94,7 +105,7 @@
     $("#name-display").text(snapshot.val().name);
     $("#destination-display").text(snapshot.val().destination);
     $("#frequency-display").text(snapshot.val().frequency);
-    // $("#nextArrival-display").text(snapshot.val().nextArrival);
+    $("#nextArrival-display").text(snapshot.val().nextArrival);
     $("#minutesAway-display").text(snapshot.val().minutesAway);
-    // $("#totalBilled-display").text(snapshot.val().totalBilled);
+    $("#totalBilled-display").text(snapshot.val().totalBilled);
   });

@@ -182,12 +182,7 @@ a.btn.btn-primary {
     /* width: 56px; */
     text-align: center;
 }
-.icons{
-    margin-left: 129px;
-    width: 100%;
-    border-bottom: 1px solid white;
-    justify-content: center;
-}
+
 span.sub_icon, label.sub_icon {
     width: 1.5em;
     height: 1.5em;
@@ -310,5 +305,11 @@ span.sub_icon, label.sub_icon {
     background:#42bd41;
   }
   
-
+  .icons{
+    clear: both;
+    margin-left: 129px;
+    width: 100%;
+    border-bottom: 1px solid white;
+    justify-content: center;
+}
 
