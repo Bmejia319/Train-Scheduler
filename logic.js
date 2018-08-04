@@ -49,7 +49,7 @@
     console.log("MINUTES TILL TRAIN: " + minutesAway);
   
     // Next Train
-    var nextArrival = moment().add(minutesAway, "minutes");
+    var nextArrival = moment().add(minutesAway, "minutes").format("hh:mm");
     console.log("ARRIVAL TIME: " + moment(nextArrival).format("hh:mm"));
      
   
@@ -60,8 +60,8 @@
       destination: destination,
       firstTime: firstTime,
       frequency: frequency,
-      // nextArrival: nextArrival, 
-      // minutesAway: minutesAway,
+      nextArrival: nextArrival, 
+      minutesAway: minutesAway,
       dateAdded: firebase.database.ServerValue.TIMESTAMP
     });
   });
@@ -79,6 +79,8 @@
     console.log(sv.frequency);
     console.log(sv.nextArrival);
     console.log(sv.minutesAway);
+   
+  
 
     // Change the HTML to reflect
     $("#name-display").text(sv.name);
@@ -86,14 +88,16 @@
     $("#frequency-display").text(sv.frequency);
     $("#nextArrival-display").text(sv.nextArrival);
     $("#minutesAway-display").text(sv.minutesAway);
+  
+   
 
 
    // full list of items to the well
    $('tbody').append("<tr>" + "<div class='well'><span class='train-name'>"  + "<td>" + sv.name + 
-   " </span><span class='train-destination'> " + "<td>" + sv.destination + "</td>" +
+   " </span> <span class='train-destination'> " + "<td>" + sv.destination + "</td>" +
      " </span><span class='train-frequency'>" + "<td>" + sv.frequency + "</td>" +
-     "</span> <span class ='train-next>" + "<td>" + sv.nextArrival + "</td>" +
-       "</span> <span class='train-minutes'>" + "<td>" + sv.minutesAway + "</td>" + "</span></div>" + "<tr>");
+     "</span> <span class ='train-next'>" + "<td>" + sv.nextArrival + "</td>" +
+       "</span> <span class='train-minutes'>" + "<td>" + sv.minutesAway + "</td>" + "</span></div>" + "</tr>");
 
     // Handle the errors
   }, function(errorObject) {
@@ -107,5 +111,5 @@
     $("#frequency-display").text(snapshot.val().frequency);
     $("#nextArrival-display").text(snapshot.val().nextArrival);
     $("#minutesAway-display").text(snapshot.val().minutesAway);
-    $("#totalBilled-display").text(snapshot.val().totalBilled);
+   
   });
